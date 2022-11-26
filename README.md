@@ -1,8 +1,8 @@
-# IoTCozinhaArmario
+# Projeto IoT: Armario de Cozinha
 
 ## Como rodar
 ```bash
-git clone https://github.com/Matheusilva431/flutter-C214
+git clone https://github.com/Matheusilva431/IoTCozinhaArmario-
 ```
 
 ## Instalando as dependências
