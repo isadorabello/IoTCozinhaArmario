@@ -1,4 +1,4 @@
-from conection import Conection
+from conection.conection import Conection
 import json
 
 class ListaCompra(Conection):
