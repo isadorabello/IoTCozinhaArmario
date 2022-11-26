@@ -1,23 +1,39 @@
-import paho.mqtt.client as mqtt
-import armario
+import time
+from armario import Armario
+from listacompra import ListaCompra
 
-mqttBroker ="test.mosquitto.org"
-client = mqtt.Client("armarioC115Inatel")
-client.connect(mqttBroker)
+#instanciando um armario
+armario = Armario()
 
-#Produto baseados em unidades
-client.publish("Cozinha/Armario/Oleo", retain=True, qos=1, payload=6)
-client.publish("Cozinha/Armario/CremeLeite", retain=True, qos=1, payload=3)
-client.publish("Cozinha/Armario/Leite", retain=True, qos=1, payload=10)
-client.publish("Cozinha/Armario/Condensado", retain=True, qos=1, payload=7)
-client.publish("Cozinha/Armario/Molho", retain=True, qos=1, payload=5)
-client.publish("Cozinha/Armario/Milho", retain=True, qos=1, payload=1)
-client.publish("Cozinha/Armario/Ervilha", retain=True, qos=1, payload=4)
+#instanciando um lista de compras
+listacompra = ListaCompra()
 
-#Produtos baseados em Kg
-client.publish("Cozinha/Armario/Arroz", retain=True, qos=1, payload=4.5)
-client.publish("Cozinha/Armario/Feijao", retain=True, qos=1, payload=3.2)
-client.publish("Cozinha/Armario/Cafe", retain=True, qos=1, payload=1.8)
-client.publish("Cozinha/Armario/Sal", retain=True, qos=1, payload=1.1)
-client.publish("Cozinha/Armario/Acucar", retain=True, qos=1, payload=2.8)
-client.publish("Cozinha/Armario/Farinha", retain=True, qos=1, payload=1.5)
+#Criando um vetor de produtos vazios
+produtos = []
+
+#Produtos pre-definidos
+criarprodutos = [
+    ["Arroz", 0, 5, 4.1],
+    ["Feijao", 0, 5, 0],
+    ["Cafe", 0, 2, 0],
+    ["Sal", 0, 2, 0.1],
+    ["Acucar", 0, 5, 2.4],
+    ["Farinha", 0, 2, 1.7],
+    ["Oleo", 0, 10, 1],
+    ["Leite", 0, 10, 2],
+    ["Molho", 0, 10, 3],
+    ["CremeLeite", 0, 10, 4],
+    ["Condensado", 0, 10, 5],
+    ["Milho", 0, 10, 7],
+    ["Ervilha", 0, 10, 2],
+    ["Miojo", 0, 10, 8],
+]
+
+#Inserindo os produtos pre-definido no vetor de produtos
+for aux in criarprodutos:
+    produtos = armario.criandoProdutos(aux[0], aux[1], aux[2], aux[3], produtos)
+
+
+armario.publish(armario.to_json(produto=produtos))
+time.sleep(1)
+listacompra.Calculate(produtos=produtos)

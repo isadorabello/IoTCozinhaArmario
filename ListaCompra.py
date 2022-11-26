@@ -1,14 +1,31 @@
-import paho.mqtt.client as mqtt
-import armario
-import time
+from conection import Conection
+import json
 
-mqttBroker ="test.mosquitto.org"
-client = mqtt.Client("armarioC115Inatel")
-client.connect(mqttBroker)
+class ListaCompra(Conection):
 
-ListaCompra = [" "]*13
-ListaCompra[0] = "Arroz"
+    listaCompra_json = '{"Item1": "", "Item2": "", "Item3": "", "Item4": "", "Item5": "", "Item6": "", "Item7": "", "Item8": "", "Item9": "", "Item10": "", "Item11": "", "Item12": "", "Item13": "", "Item14": ""}'
 
-for i in ListaCompra:
-    client.publish("Cozinha/ListaCompras", retain=True, qos=1, payload=i)
-    time.sleep(1)
+    listaCompra = json.loads(listaCompra_json)
+
+    def to_json(self):
+        auxLista = '{'
+        
+        for k, v in self.listaCompra.items():
+            auxLista += '"' + str(k) + '": "' + str(v) + '",'
+        
+        auxLista += '}'
+
+        return auxLista
+
+    def Publish(self, payload):
+        self.client.publish(topic="Cozinha/ListaCompras", retain=True,qos=1, payload=payload)
+    
+    def Calculate(self, produtos):
+        for aux in produtos:
+            if aux.atual <= aux.max*.3:
+                for k, v in self.listaCompra.items():
+                    if v == "":
+                        self.listaCompra[k] = aux.nome
+                        break
+
+        self.Publish(self.to_json())
