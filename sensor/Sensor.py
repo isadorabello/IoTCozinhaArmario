@@ -1,4 +1,3 @@
-
 from controller.armario import Armario
 
 #Criando um vetor de produtos vazio
