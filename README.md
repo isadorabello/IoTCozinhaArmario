@@ -6,7 +6,7 @@ Repositório contendo códigos para a avaliação final de C115, a proposta é i
 
 Para o projeto foi utilizado:
 
-| **Itens** | **Programas**  |
+| **Itens** | **Software**  |
 |------------------|--------------|
 | IDE/Compilador | VS Code |
 | Protocolo | MQTT |
