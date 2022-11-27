@@ -82,4 +82,4 @@ python main.py
 | **Nome**        |
 |-----------------|
 | [Matheus Chagas](https://github.com/Matheusilva431) |
-| [Isadora Bello](https://github.com/isadorabello1) |
+| [Isadora Bello](https://github.com/isadorabello) |
