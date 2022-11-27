@@ -5,6 +5,7 @@ produtos = []
 
 #Produtos pre-definidos
 criarprodutos = [
+    [Nome, min, max, atual]
     ["Arroz", 0, 5, 2.1],
     ["Feijao", 0, 5, 2],
     ["Cafe", 0, 2, 0],
